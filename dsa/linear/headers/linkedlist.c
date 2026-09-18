@@ -1,7 +1,9 @@
-#include "linked-list.h"
+#include "linkedlist.h"
+
+NODE* head = NULL;
 
 void insert(int k){
-  NODE* p = (NODE*)malloc(sizeof(NODE)), q = head;
+  NODE *p = (NODE*)malloc(sizeof(NODE)), *q = head;
   p->key=k;
   p->next=NULL;
   if(!head) { head=p; return; }
@@ -10,14 +12,14 @@ void insert(int k){
 }
 
 void insertFirst(int k){
-  NODE* p = (NODE*)malloc(sizeof(p));
+  NODE *p = (NODE*)malloc(sizeof(NODE));
   p->key=k;
   p->next=head; //links the previous head NODE
   head=p; //links head and new NODE
 }
 
 void insertPos(int k, int pos){
-  NODE* p= (NODE*)malloc(sizeof(p)), q = head;
+  NODE *p= (NODE*)malloc(sizeof(NODE)), *q = head;
   int i;
   p->key=k;
   for(i=1;i<pos-2;i++) q=q->next; //moves to prev NODE
@@ -25,8 +27,8 @@ void insertPos(int k, int pos){
   q->next=p; //links new NODE and prev NODE
 }
 
-int delete(){
-  NODE* p = head;
+int deleteLast(){
+  NODE *p = head;
   int k;
   while(p->next->next) p=p->next; //moves point to penultimate NODE
   k=p->next->key; //copies the end NODEkey
@@ -36,7 +38,7 @@ int delete(){
 }
 
 int deleteFirst(){
-  NODE* p=head;
+  NODE *p=head;
   int k=p->key;
   head=p->next;
   free(p);
@@ -45,18 +47,18 @@ int deleteFirst(){
 }
 
 int deletePos(int pos){
-  NODE* p = head,q;
+  NODE *p = head, *q;
   int i,k;
-  for(i=1;i<pos-2;++) p=p->next; //moves pointer to prev
+  for(i=1;i<pos-2;i++) p=p->next; //moves pointer to prev
   q=p->next;
   k=q->key;
   p->next=q->next; //links prev to next
-  free(q)
+  free(q);
   q->next=NULL; //handling dangling
   return k;
 }
 
-void traverse(){
+void display(){
   NODE *p=head;
   while(p){
     printf("%d\n",p->key);
