@@ -6,3 +6,5 @@
 
 # Unignore all dirs
 !*/
+dsa/linear/lldemo.exe
+dsa/linear/headers/doublylinkedlist.h.gch

@@ -37,8 +37,8 @@ void insertPos(int k, int pos){
 int deletePos(int pos){
  NODE *p = head,*q;
  int i,k;
- for(i=0;i<pos-1;i++) p=p->next;
- q=p->next->next;
+ for(i=1;i<pos-1;i++) p=p->next;
+ q=p->next;
  k=q->key;
  q->next->prev=p;
  p->next=q->next;
