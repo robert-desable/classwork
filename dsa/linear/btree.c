@@ -20,7 +20,7 @@ void createNode(int k){
  }
  while(q){
   r=q;
-  print("%d L/R of %d? (1/0) ",k,q->key);
+  printf("%d L/R of %d? (1/0) ",k,q->key);
   scanf("%d",&ch);
   if(ch) q=q->left;
   else q=q->right;
@@ -53,9 +53,41 @@ void createNodeBST(int k){
 void inorder(NODE *r){
  if(r){
   inorder(r->left);
-  printf("%d ",r->key);
+  printf("%d ",&r->key);
   inorder(r->right);
  }
+}
+
+//write the number of nodes in a btree or bstree
+int countNode(NODE* r){
+	if(!r)
+		return 0;
+	return 1 + countNode(r->left) + countNode(r->right);
+}
+
+//input a key val and find it in the bstree
+int searchBST(int key){
+	NODE *r = root;
+	while(r){
+		if(r->key==key) return 1;
+		if(key<r->key) r=r->left;
+		else r=r->right;
+	}
+	return 0;
+}
+
+//write a recursive function to count the number of leaf nodes in btree or bstree
+int countLeafNode(NODE *r){
+	if(!r->right && !r->left)
+		return 1;
+	return countNode(r->left) + countNode(r->right);
+}
+
+//recursive function to calculate non leaf nodes
+int countNonLeafNode(NODE *r){
+	if(!r->right && !r->left)
+		return 0;
+	return 1 + countNode(r->left) + countNode(r->right);
 }
 
 int main(){
@@ -67,5 +99,9 @@ int main(){
  createNodeBST(1);
  createNodeBST(7);
  inorder(root);
+ 
+ printf("\nNumber of nodes: %d\t",countNode(root));
+ printf("\nNumber of leaf nodes: %d\t",countLeafNode(root));
+ printf("\nNumber of non leaf nodes: %d\t",countNonLeafNode(root));
  return 0;
 }
