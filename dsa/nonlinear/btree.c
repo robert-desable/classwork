@@ -90,6 +90,10 @@ int countNonLeafNode(NODE *r){
 	return 1 + countNode(r->left) + countNode(r->right);
 }
 
+int treeHeight(NODE *r){
+ if(!r) return 0;
+ return 1 + ( treeHeight(r->left) > treeHeight(r->right) ) ? treeHeight(r->left):treeHeight(r->right);
+}
 int main(){
  createNodeBST(6);
  createNodeBST(8);
